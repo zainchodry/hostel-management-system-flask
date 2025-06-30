@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Available Hostel Rooms{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4 text-center">🏨 Available Hostel Rooms</h1>
+
+    <div class="row">
+        {% for room in rooms %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm h-100 border {% if room.is_available %}border-success{% else %}border-danger{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">Room #{{ room.room_number }}</h5>
+                    <p class="card-text">
+                        <strong>Status:</strong>
+                        <span class="{% if room.is_available %}text-success{% else %}text-danger{% endif %}">
+                            {{ 'Available ✅' if room.is_available else 'Full ❌' }}
+                        </span>
+                    </p>
+                    <p class="card-text"><strong>Rent:</strong> {{ room.rent }} PKR/month</p>
+                    <p class="card-text"><strong>Admin Contact:</strong><br>
+                        📧 {{ room.admin_email }}<br>
+                        📞 {{ room.admin_phone }}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 text-center">
+                    {% if room.is_available %}
+                        <a href="{{ url_for('main.book', room_id=room.id) }}" class="btn btn-success w-100">Book Now</a>
+                    {% else %}
+                        <button class="btn btn-secondary w-100" disabled>Not Available</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

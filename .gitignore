@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# SQLite database
+*.sqlite3
+*.db
+
+# Flask-specific
+instance/
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Python test cache
+.pytest_cache/
+.coverage
+
+# Compiled HTML and cache
+*.html.save
+__pypackages__/
+
+# Email credentials backup (in case)
+config.json

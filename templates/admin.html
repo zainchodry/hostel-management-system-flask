@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Add Room{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">🛠️ Admin Panel - Add Room</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">➕ Add New Room</h4>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Room Number</label>
+                            <input type="text" class="form-control" name="room_number" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Rent (PKR/month)</label>
+                            <input type="number" class="form-control" name="rent" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select">
+                                <option value="available">Available</option>
+                                <option value="full">Full</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Admin Email</label>
+                            <input type="email" class="form-control" name="admin_email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Admin Phone</label>
+                            <input type="text" class="form-control" name="admin_phone" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">💾 Save Room</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h2 class="text-center mb-4">📋 Existing Rooms</h2>
+    <div class="row">
+        {% for room in rooms %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card border {% if room.is_available %}border-success{% else %}border-danger{% endif %} shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Room #{{ room.room_number }}</h5>
+                    <p class="card-text">
+                        <strong>Status:</strong>
+                        <span class="{% if room.is_available %}text-success{% else %}text-danger{% endif %}">
+                            {{ 'Available ✅' if room.is_available else 'Full ❌' }}
+                        </span>
+                    </p>
+                    <p class="card-text"><strong>Rent:</strong> {{ room.rent }} PKR</p>
+                    <p class="card-text"><strong>Email:</strong> {{ room.admin_email }}</p>
+                    <p class="card-text"><strong>Phone:</strong> {{ room.admin_phone }}</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-muted text-center">No rooms added yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
